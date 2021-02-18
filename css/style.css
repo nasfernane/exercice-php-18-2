@@ -1,0 +1,25 @@
+form {
+    width: 300px;
+}
+
+header,
+nav {
+    height: 15vh;
+}
+
+body {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+a.active {
+    font-weight: bold;
+}

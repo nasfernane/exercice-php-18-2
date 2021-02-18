@@ -1,37 +1,29 @@
 <?php 
-require('header.php');
-?>
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="#">Mon site</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/blog.php">Blog</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/contact.php">Contact</a>
-                </li>
-            </ul>
-            <form class="d-flex">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Search</button>
-            </form>
-        </div>
-    </div>
-</nav>
-<section class="home center">
-    <div>Ici c'est la home page !</div>
-</section>
+require('./components/header.php');
+require('./components/nav.php');
 
-<?php 
-require('footer.php');
+$arrayPages = [
+    'home' => 'home.php',
+    'contact' => 'contact.php',
+    'blog' => 'blog.php',
+];
+
+// La variable $page existe-elle dans l'url ?
+if (!empty($_GET['page'])) {
+    // Vérification de la valeur passée dans l'url : est-elle une clé du tableau ?
+    if(array_key_exists(strtolower($_GET['page']), $arrayPages)) {
+    // Oui, alors on l'importe
+    require('views/'. $arrayPages[ strtolower($_GET['page']) ] );
+    } else {
+    // Non, alors on importe un fichier par défaut
+    include('views/home.php');
+    }
+} else {
+// Non, on affiche la page d'accueil par défaut
+require('views/'. $arrayPages['home']);
+}
+
+require ('./components/footer.php');
+
 ?>
-	
