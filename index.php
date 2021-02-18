@@ -12,7 +12,7 @@ $arrayViews = [
 // récupère l'url après "/index/"
 $path = strtolower(substr($_SERVER["REQUEST_URI"], 1));
 
-// si il y a un chemin existe
+// si il y a un chemin 
 if ($path) {
     // si le chemin existe dans les vues
     if (array_key_exists($path, $arrayViews)) {
@@ -21,7 +21,6 @@ if ($path) {
         require('views/404.php');
     }
 }
-
 
 require ('./components/footer.php');
 
