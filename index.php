@@ -3,26 +3,25 @@
 require('./components/header.php');
 require('./components/nav.php');
 
-$arrayPages = [
+$arrayViews = [
     'home' => 'home.php',
     'contact' => 'contact.php',
     'blog' => 'blog.php',
 ];
 
-// La variable $page existe-elle dans l'url ?
-if (!empty($_GET['page'])) {
-    // Vérification de la valeur passée dans l'url : est-elle une clé du tableau ?
-    if(array_key_exists(strtolower($_GET['page']), $arrayPages)) {
-    // Oui, alors on l'importe
-    require('views/'. $arrayPages[ strtolower($_GET['page']) ] );
+// récupère l'url après "/index/"
+$path = strtolower(substr($_SERVER["REQUEST_URI"], 1));
+
+// si il y a un chemin existe
+if ($path) {
+    // si le chemin existe dans les vues
+    if (array_key_exists($path, $arrayViews)) {
+        require("views/$arrayViews[$path]");
     } else {
-    // Non, alors on importe un fichier par défaut
-    include('views/home.php');
+        require('views/404.php');
     }
-} else {
-// Non, on affiche la page d'accueil par défaut
-require('views/'. $arrayPages['home']);
 }
+
 
 require ('./components/footer.php');
 
